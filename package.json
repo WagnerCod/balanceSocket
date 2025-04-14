@@ -1,0 +1,11 @@
+{
+  "name": "balancasocket",
+  "version": "1.0.0",
+  "description": "conexao balanca via tcp/ip socket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wagner ferreira",
+  "license": "ISC"
+}
