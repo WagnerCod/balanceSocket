@@ -1,6 +1,6 @@
 {
-  "name": "balancasocket",
-  "version": "1.0.0",
+  "name": "balancesocket",
+  "version": "1.0.1",
   "description": "conexao balanca via tcp/ip socket",
   "main": "index.js",
   "scripts": {

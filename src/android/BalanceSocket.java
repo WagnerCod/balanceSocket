@@ -1,4 +1,4 @@
-package cordova.plugin.balancaSocket;
+package cordova.plugin.balanceSocket;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
@@ -10,24 +10,24 @@ import java.net.Socket;
 import android.util.Log;
 import android.content.Context;
 
-public class BalancaSocket extends CordovaPlugin {
+public class BalanceSocket extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if ("conectarBalanca".equals(action)) {
-            String ip = args.getString(0);
-            int porta = args.getInt(1);
+        if ("connect".equals(action)) {
+            String host = args.getString(0);
+            int port = args.getInt(1);
 
-            conectarBalanca(ip, porta, callbackContext);
+            connect(host, port, callbackContext);
             return true;
         }
         return false;
     }
 
-    private void conectarBalanca(String ip, int porta, CallbackContext callbackContext) {
+    private void connect(String host, int port, CallbackContext callbackContext) {
         cordova.getThreadPool().execute(() -> {
-            try (Socket socket = new Socket(ip, porta)) {
-                Log.d("TAG", "Conectado a " + ip + ":" + porta);            
+            try (Socket socket = new Socket(host, port)) {
+                Log.d("TAG", "Conectado a " + host + ":" + port);            
 
                 InputStream in = socket.getInputStream();
                 byte[] buffer = new byte[1024];

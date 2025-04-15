@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova.plugin.balancaSocket" version="0.0.1"
+<plugin id="cordova.plugin.balanceSocket" version="0.0.1"
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>balancaSocket</name>
-    <js-module name="balancaSocket" src="www/balancaSocket.js">
-        <clobbers target="cordova.plugins.balancaSocket" />
+    <name>balanceSocket</name>
+    <js-module name="balanceSocket" src="www/balanceSocket.js">
+        <clobbers target="cordova.plugins.balanceSocket" />
     </js-module>
 
     <platform name="android">
         <config-file target="config.xml" parent="/*">
-            <feature name="BalancaSocket">
-                <param name="android-package" value="cordova.plugin.balancaSocket.BalancaSocket" />
+            <feature name="BalanceSocket">
+                <param name="android-package" value="cordova.plugin.balanceSocket.BalanceSocket" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
@@ -19,7 +19,7 @@
             <uses-permission android:name="android.permission.INTERNET" />
         </config-file>
 
-        <source-file src="src/android/BalancaSocket.java" target-dir="src/cordova/plugin/balancaSocket/BalancaSocket" />
+        <source-file src="src/android/BalanceSocket.java" target-dir="src/cordova/plugin/balanceSocket/BalanceSocket" />
     </platform>
 
 </plugin>
