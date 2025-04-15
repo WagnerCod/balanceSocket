@@ -36,13 +36,10 @@ exemploConexaoBalanca() {
     port,
     (pesoRaw: string) => {
       const formatarPeso = (raw: string): string => {
-<<<<<<< HEAD
+
         //retorno padrao da balança q0 000000000000a
         const cleanRaw = raw.trim();
-=======
-        const cleanRaw = raw.trim();
 
->>>>>>> f204a6893bd15eb983384b55e5dad0e70e71e1e4
         // Ignora os dois primeiros caracteres e espaço, se houver
         let startIndex = 2;
         if (cleanRaw[startIndex] === ' ') {
