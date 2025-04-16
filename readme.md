@@ -31,7 +31,7 @@ exemploConexaoBalanca() {
     return;
   }
 
-  cordova.plugins.balanceSocket.conectarBalanca(
+  cordova.plugins.balanceSocket.connect(
     host,
     port,
     (pesoRaw: string) => {
