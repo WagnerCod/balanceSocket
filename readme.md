@@ -68,5 +68,12 @@ exemploConexaoBalanca() {
       console.error('Erro ao conectar:', err);
       this.peso = 'Erro na balança';
     }
-  );
+  }
 }
+
+  disconnect(){
+    cordova.plugins.balanceSocket.disconnect((ok: string) => 
+      console.log("Desconectado:", ok),
+      (err: any) => console.error("Erro ao desconectar:", err)
+    );
+  }
