@@ -10,14 +10,14 @@ Clone ou copie o plugin para dentro do seu projeto Ionic/Cordova:
 cordova plugin add ./caminho/para/balanceSocket --link
 
 ## Estrutura do Plugin
-cordova.plugin.balancaSocket/
+cordova.plugin.balanceSocket/
 │
 ├── plugin.xml
 ├── www/
-│   └── balancaSocket.js
+│   └── balanceSocket.js
 └── src/
     └── android/
-        └── BalancaSocket.java
+        └── balanceSocket.java
 
 ## Exemplo de script no ionic angular ja formatado para tonelada, kg, e gramas
 
@@ -25,13 +25,13 @@ exemploConexaoBalanca() {
   const host = '00.00.00.00';
   const port = 0000;
 
-  if (!(window as any).cordova.plugins?.balancaSocket) {
-    console.error('Plugin balancaSocket não encontrado');
+  if (!(window as any).cordova.plugins?.balanceSocket) {
+    console.error('Plugin balanceSocket não encontrado');
     this.peso = 'Erro: Plugin não carregado';
     return;
   }
 
-  cordova.plugins.balancaSocket.conectarBalanca(
+  cordova.plugins.balanceSocket.connect(
     host,
     port,
     (pesoRaw: string) => {
