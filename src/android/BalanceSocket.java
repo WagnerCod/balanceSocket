@@ -50,9 +50,9 @@ public class BalanceSocket extends CordovaPlugin {
                         String peso = new String(buffer, 0, length).trim();
                         if (!peso.equals(ultimoPeso)) {
                             ultimoPeso = peso;
-                            Log.d(TAG, "Peso novo recebido: " + peso);
+                            Log.d(TAG, "Peso novo recebido: " + ultimoPeso);
 
-                            PluginResult result = new PluginResult(PluginResult.Status.OK, peso);
+                            PluginResult result = new PluginResult(PluginResult.Status.OK, ultimoPeso);
                             result.setKeepCallback(true);
                             streamingCallbackContext.sendPluginResult(result);
                         }
@@ -82,6 +82,6 @@ public class BalanceSocket extends CordovaPlugin {
         } catch (Exception e) {
             Log.e(TAG, "Erro ao desconectar: " + e.getMessage());
             callbackContext.error("Erro ao desconectar: " + e.getMessage());
-        }
+        } 
     }
 }
