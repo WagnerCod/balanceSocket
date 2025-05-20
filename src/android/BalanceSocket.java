@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 import android.util.Log;
 import android.content.Context;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class BalanceSocket extends CordovaPlugin {
     private Socket socket;
@@ -35,6 +37,37 @@ public class BalanceSocket extends CordovaPlugin {
         return false;
     }
 
+    // private void connect(String host, int port, CallbackContext callbackContext) {
+    //     cordova.getThreadPool().execute(() -> {
+    //         try {
+    //             socket = new Socket(host, port);
+    //             Log.d(TAG, "Conectado a " + host + ":" + port);
+    //             InputStream in = socket.getInputStream();
+    //             byte[] buffer = new byte[1024];
+    //             isReading = true;
+    //             streamingCallbackContext = callbackContext;
+    //             while (!socket.isClosed() && isReading)  {
+    //                 int length = in.read(buffer);
+    //                 if (length > 0) {
+    //                     String peso = new String(buffer, 0, length).trim();
+    //                     if (!peso.equals(ultimoPeso)) {
+    //                         ultimoPeso = peso;
+    //                         Log.d(TAG, "Peso novo recebido: " + ultimoPeso);
+
+    //                         PluginResult result = new PluginResult(PluginResult.Status.OK, ultimoPeso);
+    //                         result.setKeepCallback(true);
+    //                         streamingCallbackContext.sendPluginResult(result);
+    //                     }
+    //                 }
+    //             }
+
+    //         } catch (Exception e) {
+    //             Log.e(TAG, "Erro ao conectar: " + e.getMessage());
+    //             callbackContext.error("Erro ao conectar: " + e.getMessage());
+    //         }
+    //     });
+    // }
+
     private void connect(String host, int port, CallbackContext callbackContext) {
         cordova.getThreadPool().execute(() -> {
             try {
@@ -47,24 +80,38 @@ public class BalanceSocket extends CordovaPlugin {
                 while (!socket.isClosed() && isReading)  {
                     int length = in.read(buffer);
                     if (length > 0) {
-                        String peso = new String(buffer, 0, length).trim();
+                        // transforma em String bruta
+                        String raw = new String(buffer, 0, length);
+    
+                        // extrai **a última** sequência de dígitos que apareceu
+                        java.util.regex.Matcher m = java.util.regex.Pattern.compile("(\\d+)").matcher(raw);
+                        String peso = null;
+                        while (m.find()) {
+                            peso = m.group(1);
+                        }
+    
+                        // se não tiver número, ignora
+                        if (peso == null) {
+                            continue;
+                        }
+    
+                        // só envia se for diferente do último
                         if (!peso.equals(ultimoPeso)) {
                             ultimoPeso = peso;
                             Log.d(TAG, "Peso novo recebido: " + ultimoPeso);
-
                             PluginResult result = new PluginResult(PluginResult.Status.OK, ultimoPeso);
                             result.setKeepCallback(true);
                             streamingCallbackContext.sendPluginResult(result);
                         }
                     }
                 }
-
             } catch (Exception e) {
                 Log.e(TAG, "Erro ao conectar: " + e.getMessage());
                 callbackContext.error("Erro ao conectar: " + e.getMessage());
             }
         });
     }
+    
 
     private void disconnect(CallbackContext callbackContext) {
         try {
